@@ -1,0 +1,37 @@
+<idea-plugin>
+  <id>com.aiunng.prj.idea.plugin.date.convert</id>
+  <name>Date-Convert</name>
+  <version>1.0.0</version>
+  <vendor email="692960015@qq.com" url="https://www.yuque.com/aiunng/elrg1e/ws3isn">w*Yu</vendor>
+
+  <description><![CDATA[
+    <a href="https://www.yuque.com/aiunng/elrg1e/ws3isn">☞官方文档</a><br><br><br>
+      时间转换插件，提供时间戳及CST的时间转换。<br>
+      <em></em>
+    ]]></description>
+
+  <change-notes><![CDATA[
+      20210112 - v1.0.0 基础功能实现<br>
+      <em></em>
+    ]]>
+  </change-notes>
+
+  <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="173.0"/>
+
+  <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <depends>com.intellij.modules.platform</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+    <action id="date-convert.start" class="com.aiunng.prj.StartTask" text="Date Convert" description="时间转换工具">
+      <add-to-group group-id="ToolsMenu" anchor="last"/>
+    </action>
+  </actions>
+
+</idea-plugin>

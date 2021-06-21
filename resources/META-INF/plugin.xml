@@ -1,0 +1,44 @@
+<idea-plugin>
+  <id>com.aiunng.prj.idea.plugin.date.convert</id>
+  <name>Date-Convert</name>
+  <version>1.0.0.03</version>
+  <vendor email="692960015@qq.com" url="https://www.yuque.com/aiunng/elrg1e/ws3isn">wxYu</vendor>
+
+  <description><![CDATA[
+    <a href="https://www.yuque.com/aiunng/elrg1e/ws3isn">☞Help</a><br><br>
+      Date-Convert.<br>
+      A time conversion tool.
+      Provides timestamp and date conversion with each other
+      and CST conversion date function. The interface is simple and
+      functional. You can launch it under the Tools menu,
+      or you can use the shortcut ctrl + shift + D.<br><br>
+      <img src="https://cdn.nlark.com/yuque/0/2021/png/379666/1610443419953-9390f6db-a788-4a09-b5b9-07abccea3ba5.png?x-oss-process=image%2Fresize%2Cw_1202" width="360"/>
+      <em></em><br><br>
+    ]]></description>
+
+  <change-notes><![CDATA[
+      20210112 - v1.0.0 基础功能实现<br>
+      <em></em>
+    ]]>
+  </change-notes>
+
+  <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="173.0"/>
+
+  <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <depends>com.intellij.modules.platform</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+    <action id="date-convert.start" class="com.aiunng.prj.StartTask" text="Date Convert" description="时间转换工具">
+      <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl D"/>
+      <add-to-group group-id="ToolsMenu" anchor="last"/>
+    </action>
+  </actions>
+
+</idea-plugin>
