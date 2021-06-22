@@ -19,7 +19,7 @@ public class SwingManager {
     public static void createAndShowGUI() {
 
         // 创建及设置窗口
-        JFrame frame = new JFrame("时间转换工具 v1.0.0");
+        JFrame frame = new JFrame("时间转换工具");
         frame.setBounds(600, 300, 650, 350);
 
         Container contentPane = frame.getContentPane();
