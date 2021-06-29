@@ -9,6 +9,7 @@ import static com.aiunng.prj.util.DateConverter.converZone;
 import static com.aiunng.prj.util.DateConverter.getCurrentDate;
 import static com.aiunng.prj.util.DateConverter.getCurrentTimestamp;
 import static com.aiunng.prj.util.DateConverter.getDate;
+import static com.aiunng.prj.util.DateConverter.parseToZoneTime;
 import static com.aiunng.prj.util.DateConverter.zonedDateTimeFormat;
 import static com.aiunng.prj.util.SwingUtil.LEVE_3;
 import static com.aiunng.prj.util.SwingUtil.TEXT_NORMAL;
@@ -129,7 +130,8 @@ public class SwingManager {
     // 下拉选
     JComboBox comboBox = addComboBox(LEVE_3, 10, 35 + yOffset, 110, 25, contentPanel);
     //输入
-    addJTextArea(zonedDateTimeFormat(ZonedDateTime.now(ZoneId.systemDefault())), TEXT_NORMAL, 140, 35 + yOffset, 230, 25, contentPanel);
+    JTextArea jTextArea = addJTextArea(zonedDateTimeFormat(ZonedDateTime.now(ZoneId.systemDefault())), TEXT_NORMAL, 140, 35 + yOffset, 230, 25,
+        contentPanel);
     //转换按钮
     JButton button = addJButton("->", TEXT_NORMAL, 370, 35 + yOffset, 60, 25, contentPanel);
     //返回信息
@@ -141,8 +143,12 @@ public class SwingManager {
 
     //按钮提交监听事件
     button.addActionListener(e -> {
+      // 当前时间
+      String currentTime = jTextArea.getText();
+      // 当前ZoneId
       String zoneId = comboBox.getSelectedItem().toString();
-      answer.setText(zonedDateTimeFormat(converZone(getCodeByDesc(zoneId))));
+      // 更新为转换后的时间
+      answer.setText(zonedDateTimeFormat(converZone(parseToZoneTime(currentTime), getCodeByDesc(zoneId))));
     });
   }
 
