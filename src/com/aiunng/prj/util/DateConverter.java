@@ -4,8 +4,12 @@ package com.aiunng.prj.util;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 
@@ -191,8 +195,91 @@ public class DateConverter {
         return date;
     }
 
-    public static void main(String[] args) throws ParseException {
+    /**
+     * 将时区日期时间转为字符串
+     * yyyy-MM-dd HH:mm:ss
+     * @param zonedDateTime
+     * @return
+     */
+    public static String zonedDateTimeFormat(ZonedDateTime zonedDateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return zonedDateTime.format(formatter);
+    }
 
+    public static ZonedDateTime converZone(String zoneId){
+
+        return ZonedDateTime.now(ZoneId.of(zoneId));
+    }
+
+    /**
+     * 时区ID
+     * 参考 https://www.codenong.com/cs106783334/
+     */
+    public enum StringZoneIdEnum {
+        /**
+         * 时区ID
+         */
+        SHANGHAI("Asia/Shanghai","上海"),
+        HARBIN("Asia/Harbin","哈尔滨"),
+        CHUNGKING("Asia/Chungking","重庆"),
+        URUMQI("Asia/Urumqi","乌鲁木齐"),
+        KASHGAR("Asia/Kashgar","喀什"),
+        HONG_KONG("Asia/Hong_Kong","香港"),
+        MACAO("Asia/Macao","澳门"),
+        TAIPEI("Asia/Taipei","台北"),
+
+        BANGKOK("Asia/Bangkok","曼谷"),
+        DUBAI("Asia/Dubai","迪拜"),
+        TOKYO("Asia/Tokyo","东京"),
+        SEOUL("Asia/Seoul","首尔"),
+
+
+        LONDON("Europe/London","伦敦"),
+        BERLIN("Europe/Berlin","柏林"),
+        PARIS("Europe/Paris","巴黎"),
+        NEW_YORK("America/New_York","纽约"),
+
+        ;
+
+
+        private String zoneId;
+        private String desc;
+
+        StringZoneIdEnum(String zoneId, String desc) {
+            this.zoneId = zoneId;
+            this.desc = desc;
+        }
+
+        public String getZoneId() {
+            return zoneId;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public static String getCodeByDesc(String desc) {
+            for (StringZoneIdEnum value : StringZoneIdEnum.values()) {
+                if (StringUtil.equals(desc, value.getDesc())) {
+                    return value.getZoneId();
+                }
+            }
+            return "Asia/Shanghai";
+        }
+    }
+
+    public static void main(String[] args) {
+        // 按指定时区获取当前日期和时间
+        // ZonedDateTime london = ZonedDateTime.now(ZoneId.of("Europe/London"));
+        // System.out.println(zonedDateTimeFormat(london));
+        // // 把伦敦时间转换到纽约时间:
+        // System.out.println(zonedDateTimeFormat(converZone(london,"America/New_York")));
+        //
+        // // 当前系统默认时区
+        // System.out.println(ZoneId.systemDefault().toString());
+        // // 获取可用的时区Id
+        // Set<String> availableZoneIds = ZoneId.getAvailableZoneIds();
+        // availableZoneIds.forEach(System.out::println);
 
     }
 }

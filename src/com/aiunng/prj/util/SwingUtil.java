@@ -1,6 +1,7 @@
 
 package com.aiunng.prj.util;
 
+import com.aiunng.prj.util.DateConverter.StringZoneIdEnum;
 import com.intellij.ui.components.JBScrollPane;
 
 import javax.swing.*;
@@ -62,6 +63,31 @@ public class SwingUtil {
         scrollPane.setBounds(x, y, width, height);
         contentPanel.add(scrollPane);
         return scrollPane;
+    }
+
+    /**
+     * 下拉选
+     * @param font
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param contentPanel
+     */
+    public static JComboBox addComboBox(Font font, int x, int y, int width, int height, JPanel contentPanel) {
+        // 创建下拉框
+        JComboBox comboBox = new JComboBox();
+        // 绑定下拉框选项
+        StringZoneIdEnum[] values = StringZoneIdEnum.values();
+        for (StringZoneIdEnum value : values) {
+            comboBox.addItem(value.getDesc());
+        }
+        comboBox.setFont(font);
+        comboBox.setBounds(x, y, width, height);
+        comboBox.setSelectedIndex(0);
+        contentPanel.add(comboBox);
+
+        return comboBox;
     }
 
 }
