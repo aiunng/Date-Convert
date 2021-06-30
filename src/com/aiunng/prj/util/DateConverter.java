@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 public class DateConverter {
 
   public static final String newFormat = "yyyy-MM-dd HH:mm:ss";
+  public static final String LONG_FORMAT = "VV yyyy-MM-dd HH:mm:ss.SSS";
 
   /**
    * 获取当前时间戳
@@ -202,10 +203,11 @@ public class DateConverter {
    * @param zonedDateTime
    * @return
    */
-  public static String zonedDateTimeFormat(ZonedDateTime zonedDateTime) {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(newFormat);
+  public static String zonedDateTimeFormat(ZonedDateTime zonedDateTime, String format) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
     return zonedDateTime.format(formatter);
   }
+
 
   /**
    * yyyy-MM-dd HH:mm:ss 转为 ZonedDateTime

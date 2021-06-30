@@ -13,11 +13,13 @@ import static com.aiunng.prj.util.Constant.Y_AXIS_L1_L2;
 import static com.aiunng.prj.util.Constant.Y_AXIS_L2_L1;
 import static com.aiunng.prj.util.Constant.Y_AXIS_L2_L2;
 import static com.aiunng.prj.util.Constant.Y_AXIS_START;
+import static com.aiunng.prj.util.DateConverter.LONG_FORMAT;
 import static com.aiunng.prj.util.DateConverter.StringZoneIdEnum.getCodeByDesc;
 import static com.aiunng.prj.util.DateConverter.converZone;
 import static com.aiunng.prj.util.DateConverter.getCurrentDate;
 import static com.aiunng.prj.util.DateConverter.getCurrentTimestamp;
 import static com.aiunng.prj.util.DateConverter.getDate;
+import static com.aiunng.prj.util.DateConverter.newFormat;
 import static com.aiunng.prj.util.DateConverter.parseToZoneTime;
 import static com.aiunng.prj.util.DateConverter.zonedDateTimeFormat;
 import static com.aiunng.prj.util.SwingUtil.LEVE_2;
@@ -93,12 +95,11 @@ public class SwingManager {
 
   /**
    * 动态展示当前时区时间
-   *
    * @param contentPanel
    */
   private static int buildClockRegion(JPanel contentPanel, int y) {
     JLabel timeLable = addLabel(
-        zonedDateTimeFormat(ZonedDateTime.now(ZoneId.systemDefault())), LEVE_2, 230, y, 300, 25, contentPanel);
+        zonedDateTimeFormat(ZonedDateTime.now(ZoneId.systemDefault()),LONG_FORMAT), LEVE_3, 180, y, 330, 25, contentPanel);
     setTimer(timeLable);
     return y;
   }
@@ -156,7 +157,7 @@ public class SwingManager {
     // 下拉选
     JComboBox comboBox = addComboBox(LEVE_3, X_AXIS_L1, y + offset, 110, 25, contentPanel);
     //输入
-    JTextArea jTextArea = addJTextArea(zonedDateTimeFormat(ZonedDateTime.now(ZoneId.systemDefault())), TEXT_NORMAL, X_AXIS_INPUT, y + offset, 230, 25,
+    JTextArea jTextArea = addJTextArea(zonedDateTimeFormat(ZonedDateTime.now(ZoneId.systemDefault()),newFormat), TEXT_NORMAL, X_AXIS_INPUT, y + offset, 230, 25,
         contentPanel);
     //转换按钮
     JButton button = addJButton("->", TEXT_NORMAL, X_AXIS_CONVER_BUTTON, y + offset, 60, 25, contentPanel);
@@ -174,7 +175,7 @@ public class SwingManager {
       // 当前ZoneId
       String zoneId = comboBox.getSelectedItem().toString();
       // 更新为转换后的时间
-      answer.setText(zonedDateTimeFormat(converZone(parseToZoneTime(currentTime), getCodeByDesc(zoneId))));
+      answer.setText(zonedDateTimeFormat(converZone(parseToZoneTime(currentTime), getCodeByDesc(zoneId)),newFormat));
     });
     return y + offset;
   }
@@ -187,7 +188,7 @@ public class SwingManager {
   private static void setTimer(JLabel time) {
     final JLabel varTime = time;
     Timer timeAction = new Timer(100, e -> varTime.setText(
-        zonedDateTimeFormat(ZonedDateTime.now(ZoneId.systemDefault()))));
+        zonedDateTimeFormat(ZonedDateTime.now(ZoneId.systemDefault()),LONG_FORMAT)));
     timeAction.start();
   }
 
