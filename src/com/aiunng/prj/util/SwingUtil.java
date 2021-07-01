@@ -1,8 +1,11 @@
 
 package com.aiunng.prj.util;
 
-import com.aiunng.prj.util.DateConverter.StringZoneIdEnum;
+import static com.aiunng.prj.util.ConfigUtil.getZoneIdsCache;
+
+import com.aiunng.prj.entity.StringZoneIdEnum;
 import com.intellij.ui.components.JBScrollPane;
+import java.awt.Container;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -51,6 +54,14 @@ public class SwingUtil {
     return y + offset;
   }
 
+  public static JLabel addLabel(String text, Font font, int x, int y, int width, int height, Container contentPane) {
+    JLabel label = new JLabel(text);
+    label.setFont(font);
+    label.setBounds(x, y, width, height);
+    contentPane.add(label);
+    return label;
+  }
+
   public static JTextArea addJTextArea(String text, Font font, int x, int y, int width, int height, JPanel contentPanel) {
     JTextArea textArea = new JTextArea();
     textArea.setFont(font);
@@ -89,11 +100,18 @@ public class SwingUtil {
   public static JComboBox addComboBox(Font font, int x, int y, int width, int height, JPanel contentPanel) {
     // 创建下拉框
     JComboBox comboBox = new JComboBox();
+
     // 绑定下拉框选项
+    // 默认选项
     StringZoneIdEnum[] values = StringZoneIdEnum.values();
     for (StringZoneIdEnum value : values) {
       comboBox.addItem(value.getDesc());
     }
+    // 用户配置选项
+    getZoneIdsCache().forEach((o) -> {
+      comboBox.addItem(o.getDesc());
+    });
+
     comboBox.setFont(font);
     comboBox.setBounds(x, y, width, height);
     comboBox.setSelectedIndex(0);

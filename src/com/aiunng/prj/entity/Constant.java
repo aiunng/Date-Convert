@@ -1,7 +1,12 @@
 
-package com.aiunng.prj.util;
+package com.aiunng.prj.entity;
 
 
+import static cn.hutool.core.io.FileUtil.FILE_SEPARATOR;
+
+/**
+ * 常量表
+ */
 public class Constant {
   /**
    * 一级标题 X轴坐标点 【Timestamp TO Date】
@@ -38,4 +43,9 @@ public class Constant {
    * 时间戳转时间
    */
   public static final String VIEW_TYPE_C2D = "C2D";
+  /**
+   * 本地配置存放目录
+   * System.getProperty("user.home") 用户文件夹
+   */
+  public static final String LOCAL_CFG_PATH = System.getProperty("user.home")+FILE_SEPARATOR+"dateconver"+FILE_SEPARATOR+"settings.cfg";
 }

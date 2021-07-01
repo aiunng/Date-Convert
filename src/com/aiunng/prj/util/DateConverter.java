@@ -232,7 +232,7 @@ public class DateConverter {
   }
 
   /**
-   * 转换为对应时区时间
+   * 将给定时区时间转换为对应时区时间
    *
    * @param current
    * @param zoneId
@@ -241,62 +241,6 @@ public class DateConverter {
   public static ZonedDateTime converZone(ZonedDateTime current, String zoneId) {
 
     return current.withZoneSameInstant(ZoneId.of(zoneId));
-  }
-
-  /**
-   * 时区ID 参考 https://www.codenong.com/cs106783334/
-   */
-  public enum StringZoneIdEnum {
-    /**
-     * 时区ID
-     */
-    SHANGHAI("Asia/Shanghai", "上海"),
-    HARBIN("Asia/Harbin", "哈尔滨"),
-    CHUNGKING("Asia/Chungking", "重庆"),
-    URUMQI("Asia/Urumqi", "乌鲁木齐"),
-    KASHGAR("Asia/Kashgar", "喀什"),
-    HONG_KONG("Asia/Hong_Kong", "香港"),
-    MACAO("Asia/Macao", "澳门"),
-    TAIPEI("Asia/Taipei", "台北"),
-
-    BANGKOK("Asia/Bangkok", "曼谷"),
-    DUBAI("Asia/Dubai", "迪拜"),
-    TOKYO("Asia/Tokyo", "东京"),
-    SEOUL("Asia/Seoul", "首尔"),
-
-
-    LONDON("Europe/London", "伦敦"),
-    BERLIN("Europe/Berlin", "柏林"),
-    PARIS("Europe/Paris", "巴黎"),
-    NEW_YORK("America/New_York", "纽约"),
-
-    ;
-
-
-    private String zoneId;
-    private String desc;
-
-    StringZoneIdEnum(String zoneId, String desc) {
-      this.zoneId = zoneId;
-      this.desc = desc;
-    }
-
-    public String getZoneId() {
-      return zoneId;
-    }
-
-    public String getDesc() {
-      return desc;
-    }
-
-    public static String getCodeByDesc(String desc) {
-      for (StringZoneIdEnum value : StringZoneIdEnum.values()) {
-        if (StringUtil.equals(desc, value.getDesc())) {
-          return value.getZoneId();
-        }
-      }
-      return "Asia/Shanghai";
-    }
   }
 
   public static void main(String[] args) {
