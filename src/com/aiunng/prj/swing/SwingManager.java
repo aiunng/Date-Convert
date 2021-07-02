@@ -3,6 +3,7 @@ package com.aiunng.prj.swing;
 
 import static com.aiunng.prj.entity.Constant.LEVE_3;
 import static com.aiunng.prj.entity.Constant.LONG_FORMAT;
+import static com.aiunng.prj.entity.Constant.TEXT_BOLD;
 import static com.aiunng.prj.entity.Constant.TEXT_NORMAL;
 import static com.aiunng.prj.entity.Constant.VIEW_TYPE_C2D;
 import static com.aiunng.prj.entity.Constant.VIEW_TYPE_D2T;
@@ -44,11 +45,17 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.util.ui.JBUI;
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.Desktop;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URI;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -94,6 +101,9 @@ public class SwingManager {
     y = addLabelY("ZonedDateTime", LEVE_3, X_AXIS_L1, y, Y_AXIS_L2_L1, 200, 25, contentPanel);
     y = buildTimeZoneRegion(y, Y_AXIS_L1_L2, contentPanel);
 
+    // 帮助
+    buildHelpRegion(contentPanel);
+
     // 系统设置
     buildCfgZoneRegion(contentPanel);
 
@@ -104,6 +114,62 @@ public class SwingManager {
     frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
     // 显示窗口
     frame.setVisible(true);
+  }
+
+  /**
+   * 帮助弹窗
+   * @param contentPanel
+   */
+  private static void buildHelpRegion(JPanel contentPanel) {
+    JButton cfgButton = addJButton("help", TEXT_NORMAL, 415, 360, 100, 25, contentPanel);
+
+    cfgButton.addActionListener(e -> {
+      JDialog jDialog = new JDialog();
+      jDialog.setTitle("help");
+      jDialog.setBounds(610, 310, 220, 180);
+      jDialog.setVisible(true);
+      jDialog.setLayout(null);
+
+      Container contentPane = jDialog.getContentPane();
+
+      JLabel imgLabel = new JLabel();
+      ImageIcon img = new ImageIcon("resources/META-INF/file/icon_50x50.png");
+      imgLabel.setIcon(img);
+      imgLabel.setBounds(10, 10, 50, 50);
+
+      JLabel authorLabel = new JLabel("author：w*Yu");
+      authorLabel.setBounds(10, 70, 100, 25);
+
+      authorLabel.setFont(TEXT_BOLD);
+
+      JLabel textLabel = new JLabel("Date-convert helps you develop faster");
+      textLabel.setBounds(10, 90, 220, 25);
+      textLabel.setFont(TEXT_BOLD);
+
+      JLabel linklabel = new JLabel("<html><a href='https://www.yuque.com/aiunng/elrg1e/ws3isn'>使用帮助、提出建议、问题反馈</a></html>");
+      // 光标类型
+      linklabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+      linklabel.setBounds(10, 110, 200, 25);
+      linklabel.setFont(TEXT_BOLD);
+
+      // 鼠标监听
+      linklabel.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+          try {
+            //打开网址
+            Desktop.getDesktop().browse(new URI("https://www.yuque.com/aiunng/elrg1e/ws3isn"));
+          } catch (Exception ex) {
+            ex.printStackTrace();
+          }
+        }
+      });
+
+      contentPane.add(imgLabel);
+      contentPane.add(authorLabel);
+      contentPane.add(textLabel);
+      contentPane.add(linklabel);
+    });
   }
 
   /**
