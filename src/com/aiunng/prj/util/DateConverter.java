@@ -1,6 +1,8 @@
 
 package com.aiunng.prj.util;
 
+import static com.aiunng.prj.entity.Constant.newFormat;
+
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -15,9 +17,6 @@ import java.util.regex.Pattern;
 
 
 public class DateConverter {
-
-  public static final String newFormat = "yyyy-MM-dd HH:mm:ss";
-  public static final String LONG_FORMAT = "VV yyyy-MM-dd HH:mm:ss.SSS";
 
   /**
    * 获取当前时间戳
