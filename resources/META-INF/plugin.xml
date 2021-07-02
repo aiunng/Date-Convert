@@ -1,22 +1,51 @@
 <idea-plugin>
   <id>com.aiunng.prj.idea.plugin.date.convert</id>
   <name>Date-Convert</name>
-  <version>1.0.0.07</version>
+  <version>1.0.0.08</version>
   <vendor email="17701306521@163.com" url="https://www.yuque.com/aiunng/elrg1e/ws3isn">w*Yu</vendor>
 
   <description><![CDATA[
-    <br><br>
-      Date-Convert.
-      A time conversion tool.
-      Provides timestamp and date conversion with each other
-      and CST conversion date function. The interface is simple and
-      functional. You can launch it under the Tools menu,
-      or you can use the shortcut ctrl + shift + D.<br><br>
-      <em></em><br><br>
+    <br>
+      <p><font size="5">A time conversion tool.</font></p>
+      <p><font size="5">使用</font></p>
+      <ul>
+        <li>tools -> Date Convert</li>
+        <li>快捷键：ctrl + shift + D</li>
+      </ul>
+      <p><font size="5">动态时间</font></p>
+      <ul>
+        <li>动态展示当前时区日期、时间</li>
+      </ul>
+      <p><font size="5">时间转换</font></p>
+      <ul>
+        <li>时间和毫秒互相转换</li>
+        <li>CST格式时间转换</li>
+      </ul>
+      <p><font size="5">时区转换</font></p>
+      <ul>
+        <li>转换为指定时区的时间</li>
+      </ul>
+      <p><font size="5">时区配置</font></p>
+      <ul>
+        <li>可新增时区，配置成功后，重新启动即可生效</li>
+      </ul>
+      <p><font size="5">使用界面</font></p>
+      <img src="https://plugins.jetbrains.com/files/17065/screenshot_259ff570-05c2-4615-8bea-410b55651e0f" width="360"/>
+      <br>
+      <img src="https://plugins.jetbrains.com/files/17065/screenshot_8615bd53-324f-4526-8ecb-cc577590bbb8" width="360"/>
     ]]></description>
 
   <change-notes><![CDATA[
-      Initial release <br>
+      <p><font size="5">1.0.0.08<</font></p>
+        <ul>
+          <li>[NEW]动态时钟</li>
+          <li>[NEW]时区转换</li>
+          <li>[NEW]时区配置</li>
+        </ul>
+      <p><font size="5">1.0.0.07</font></p>
+        <ul>
+          <li>[NEW]时间转换</li>
+        </ul>
       <em></em>
     ]]>
   </change-notes>
