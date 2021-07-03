@@ -49,7 +49,9 @@ import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -133,7 +135,13 @@ public class SwingManager {
       Container contentPane = jDialog.getContentPane();
 
       JLabel imgLabel = new JLabel();
-      ImageIcon img = new ImageIcon("resources/META-INF/file/icon_50x50.png");
+      ImageIcon img = null;
+      try {
+        img = new ImageIcon(new URL("https://plugins.jetbrains.com/files/17065/screenshot_3d94a0b9-e5c3-4b17-a49e-ad4202cf813f"));
+      } catch (MalformedURLException me) {
+        me.printStackTrace();
+      }
+      //ImageIcon img = new ImageIcon("resources/META-INF/file/icon_50x50.png");
       imgLabel.setIcon(img);
       imgLabel.setBounds(10, 10, 50, 50);
 
