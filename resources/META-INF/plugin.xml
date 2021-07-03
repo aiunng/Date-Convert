@@ -1,35 +1,60 @@
 <idea-plugin>
   <id>com.aiunng.prj.idea.plugin.date.convert</id>
   <name>Date-Convert</name>
-  <version>1.0.0.10</version>
+  <version>1.0.0.1.0</version>
   <vendor email="17701306521@163.com" url="https://www.yuque.com/aiunng/elrg1e/ws3isn">w*Yu</vendor>
 
   <description><![CDATA[
     <br>
-      <p><font size="5">A time conversion tool.</font></p>
-      <p><font size="5">How to use</font></p>
+      <p><font size="6">Date-convert helps you develop faster.</font></p>
+      <p><font size="5">How to use:</font></p>
       <ul>
         <li>Menu bar:tools -> Date Convert</li>
         <li>Shortcuts:ctrl + shift + D</li>
       </ul>
-      <p><font size="5">Dynamic Clock</font></p>
+      <p><font size="5">Dynamic Clock:</font></p>
       <ul>
         <li>Dynamic display of current time zone date and time</li>
       </ul>
-      <p><font size="5">Time Conversion</font></p>
+      <p><font size="5">Time Conversion:</font></p>
       <ul>
         <li>Time and milliseconds conversion to each other</li>
         <li>CST format time conversion</li>
       </ul>
-      <p><font size="5">Time zone conversion</font></p>
+      <p><font size="5">Time zone conversion:</font></p>
       <ul>
         <li>Convert to the time of the specified time zone</li>
       </ul>
-      <p><font size="5">Time Zone Configuration</font></p>
+      <p><font size="5">Time Zone Configuration:</font></p>
       <ul>
         <li>New time zone can be added, after successful configuration, restart to take effect</li>
       </ul>
-      <p><font size="5">User Interface</font></p>
+
+      <br>
+      <p><font size="5">如何使用：</font></p>
+      <ul>
+        <li>菜单栏：tools -> Date Convert</li>
+        <li>快捷键：ctrl + shift + D</li>
+      </ul>
+      <p><font size="5">动态时间：</font></p>
+      <ul>
+        <li>动态展示当前时区日期、时间</li>
+      </ul>
+      <p><font size="5">时间转换：</font></p>
+      <ul>
+        <li>时间和毫秒互相转换</li>
+        <li>CST格式时间转换</li>
+      </ul>
+      <p><font size="5">时区转换：</font></p>
+      <ul>
+        <li>转换为指定时区的时间</li>
+      </ul>
+      <p><font size="5">时区配置：</font></p>
+      <ul>
+        <li>可新增时区，配置成功后，重新启动即可生效</li>
+      </ul>
+
+      <p><font size="5">使用界面：</font></p>
       <img src="https://plugins.jetbrains.com/files/17065/screenshot_e8e0c0eb-0877-4d87-af62-580c9c2ae7ff" width="360"/>
       <br>
       <img src="https://plugins.jetbrains.com/files/17065/screenshot_10d766db-5570-4cfe-87ae-3645e3e1f865" width="360"/>
