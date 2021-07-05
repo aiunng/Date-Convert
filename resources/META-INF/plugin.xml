@@ -61,7 +61,7 @@
     ]]></description>
 
   <change-notes><![CDATA[
-      <p><font size="5">1.0.2<</font></p>
+      <p><font size="5">1.0.2</font></p>
         <ul>
           <li>[NEW]Dynamic Clock</li>
           <li>[NEW]Time zone conversion</li>
