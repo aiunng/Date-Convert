@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>com.aiunng.prj.idea.plugin.date.convert</id>
   <name>Date-Convert</name>
-  <version>2021.07.03.1</version>
+  <version>2021.07.16.1</version>
   <vendor email="17701306521@163.com" url="https://www.yuque.com/aiunng/elrg1e/ws3isn">w*Yu</vendor>
 
   <description><![CDATA[
@@ -29,6 +29,10 @@
       <ul>
         <li>New time zone can be added, after successful configuration, restart to take effect</li>
       </ul>
+      <p><font size="5">To Today:</font></p>
+      <ul>
+        <li>Calculate the time since the specified date,Optionally by year, month, day</li>
+      </ul>
 
       <br>
       <p><font size="5">如何使用：</font></p>
@@ -53,6 +57,10 @@
       <ul>
         <li>可新增时区，配置成功后，重新启动即可生效</li>
       </ul>
+      <p><font size="5">至今时间：</font></p>
+      <ul>
+        <li>计算指定日期至今的时间（可选按年、月、日）</li>
+      </ul>
 
       <p><font size="5">使用界面：</font></p>
       <img src="https://plugins.jetbrains.com/files/17065/screenshot_e8e0c0eb-0877-4d87-af62-580c9c2ae7ff" width="360"/>
@@ -61,6 +69,10 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p><font size="5">1.0.3</font></p>
+        <ul>
+          <li>[NEW]To Today</li>
+        </ul>
       <p><font size="5">1.0.2</font></p>
         <ul>
           <li>[NEW]Dynamic Clock</li>

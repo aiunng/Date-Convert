@@ -1,12 +1,15 @@
 
 package com.aiunng.prj.util;
 
+import static com.aiunng.prj.entity.Constant.SHORT_FORMAT;
 import static com.aiunng.prj.entity.Constant.newFormat;
+import static com.aiunng.prj.entity.IntervalFormatEnum.D;
+import static com.aiunng.prj.entity.IntervalFormatEnum.M;
+import static com.aiunng.prj.entity.IntervalFormatEnum.Y;
 
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -14,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Pattern;
+import org.apache.commons.lang3.StringUtils;
 
 
 public class DateConverter {
@@ -242,26 +246,61 @@ public class DateConverter {
     return current.withZoneSameInstant(ZoneId.of(zoneId));
   }
 
+  /**
+   * 计算距今时间
+   *
+   * @param date   输入的时间 yyyy-MM-dd HH:mm:ss
+   * @param format com.aiunng.prj.entity.IntervalFormatEnum
+   * @return
+   */
+  public static String getInterval(String date, String format) {
+    String interval = "";
+    long inputTime = convertString2Date(date, SHORT_FORMAT).getTime();
+    long currentTime = System.currentTimeMillis();
+    long day = (currentTime - inputTime) / 1000 / 60 / 60 / 24;
+
+    if (StringUtils.equals(format, D.getCode())) {
+      interval = day + D.getView();
+    }
+    if (StringUtils.equals(format, M.getCode())) {
+      String mounth = String.valueOf(day / 30);
+      String mDay = String.valueOf(day % 30);
+      interval = mounth + M.getView() + mDay + D.getView();
+
+    }
+    if (StringUtils.equals(format, Y.getCode())) {
+      String year = String.valueOf(day / 365);
+      String yMounth = String.valueOf(day % 365 / 30);
+      String yDay = String.valueOf(day % 365 % 30);
+      interval = year + Y.getView() + yMounth + M.getView() + yDay + D.getView();
+    }
+    return interval;
+  }
+
+
   public static void main(String[] args) {
-
-    // 获取当前默认时区的日期和时间
-    ZonedDateTime now = ZonedDateTime.now();
-    System.out.println(now);
-    // 打印时区
-    System.out.println(now.getZone());
-    // 获取Instant
-    Instant ins = now.toInstant();
-    System.out.println(ins.getEpochSecond());
-
-    // 按指定时区获取当前日期和时间
-    ZonedDateTime london = ZonedDateTime.now(ZoneId.of("Europe/London"));
-    System.out.println(london);
-    // 把伦敦时间转换到纽约时间
-    ZonedDateTime newYork = london.withZoneSameInstant(ZoneId.of("America/New_York"));
-    System.out.println(newYork);
-
-    // 当前系统默认时区Id
-    System.out.println("当前系统默认时区Id -> " + ZoneId.systemDefault());
+    System.out.println(getInterval("2019-11-10 00:00:00", "Y"));
+    // System.out.println(400/365);
+    // System.out.println(400%365/30);
+    // System.out.println(400%365%30);
+    // // 获取当前默认时区的日期和时间
+    // ZonedDateTime now = ZonedDateTime.now();
+    // System.out.println(now);
+    // // 打印时区
+    // System.out.println(now.getZone());
+    // // 获取Instant
+    // Instant ins = now.toInstant();
+    // System.out.println(ins.getEpochSecond());
+    //
+    // // 按指定时区获取当前日期和时间
+    // ZonedDateTime london = ZonedDateTime.now(ZoneId.of("Europe/London"));
+    // System.out.println(london);
+    // // 把伦敦时间转换到纽约时间
+    // ZonedDateTime newYork = london.withZoneSameInstant(ZoneId.of("America/New_York"));
+    // System.out.println(newYork);
+    //
+    // // 当前系统默认时区Id
+    // System.out.println("当前系统默认时区Id -> " + ZoneId.systemDefault());
 
     // 获取可用的时区Id
     //Set<String> availableZoneIds = ZoneId.getAvailableZoneIds();

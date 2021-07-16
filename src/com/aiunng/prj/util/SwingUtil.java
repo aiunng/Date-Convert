@@ -3,6 +3,7 @@ package com.aiunng.prj.util;
 
 import static com.aiunng.prj.util.ConfigUtil.getZoneIdsCache;
 
+import com.aiunng.prj.entity.IntervalFormatEnum;
 import com.aiunng.prj.entity.StringZoneIdEnum;
 import com.intellij.ui.components.JBScrollPane;
 import java.awt.Container;
@@ -86,7 +87,7 @@ public class SwingUtil {
    * @param height
    * @param contentPanel
    */
-  public static JComboBox addComboBox(Font font, int x, int y, int width, int height, JPanel contentPanel) {
+  public static JComboBox addTimeZoneComboBox(Font font, int x, int y, int width, int height, JPanel contentPanel) {
     // 创建下拉框
     JComboBox comboBox = new JComboBox();
 
@@ -100,6 +101,24 @@ public class SwingUtil {
     getZoneIdsCache().forEach((o) -> {
       comboBox.addItem(o.getDesc());
     });
+
+    comboBox.setFont(font);
+    comboBox.setBounds(x, y, width, height);
+    comboBox.setSelectedIndex(0);
+    contentPanel.add(comboBox);
+
+    return comboBox;
+  }
+
+  public static JComboBox addToTodayComboBox(Font font, int x, int y, int width, int height, JPanel contentPanel) {
+    // 创建下拉框
+    JComboBox comboBox = new JComboBox();
+
+    // 绑定下拉框选项
+    IntervalFormatEnum[] values = IntervalFormatEnum.values();
+    for (IntervalFormatEnum value : values) {
+      comboBox.addItem(value.getFormat());
+    }
 
     comboBox.setFont(font);
     comboBox.setBounds(x, y, width, height);

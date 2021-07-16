@@ -1,10 +1,24 @@
 
 package com.aiunng.prj.swing;
 
+import static com.aiunng.prj.entity.Constant.ADVER;
+import static com.aiunng.prj.entity.Constant.AUTHOR;
+import static com.aiunng.prj.entity.Constant.BLOG_LINK;
+import static com.aiunng.prj.entity.Constant.BLOG_TEXT;
+import static com.aiunng.prj.entity.Constant.CST;
+import static com.aiunng.prj.entity.Constant.CST_TO_DATE;
+import static com.aiunng.prj.entity.Constant.DATE_TO_TIMESTAMP;
+import static com.aiunng.prj.entity.Constant.ICON_URL;
 import static com.aiunng.prj.entity.Constant.LEVE_3;
 import static com.aiunng.prj.entity.Constant.LONG_FORMAT;
+import static com.aiunng.prj.entity.Constant.MILLISECONDS;
+import static com.aiunng.prj.entity.Constant.SECONDS;
+import static com.aiunng.prj.entity.Constant.SHORT_FORMAT;
 import static com.aiunng.prj.entity.Constant.TEXT_BOLD;
 import static com.aiunng.prj.entity.Constant.TEXT_NORMAL;
+import static com.aiunng.prj.entity.Constant.TIMESTAMP_TO_DATE;
+import static com.aiunng.prj.entity.Constant.TO_TODAY;
+import static com.aiunng.prj.entity.Constant.VERSION;
 import static com.aiunng.prj.entity.Constant.VIEW_TYPE_C2D;
 import static com.aiunng.prj.entity.Constant.VIEW_TYPE_D2T;
 import static com.aiunng.prj.entity.Constant.VIEW_TYPE_T2D;
@@ -16,25 +30,31 @@ import static com.aiunng.prj.entity.Constant.X_AXIS_OUTPUT;
 import static com.aiunng.prj.entity.Constant.Y_AXIS_L1_L2;
 import static com.aiunng.prj.entity.Constant.Y_AXIS_L2_L1;
 import static com.aiunng.prj.entity.Constant.Y_AXIS_L2_L2;
+import static com.aiunng.prj.entity.Constant.Y_AXIS_SETBUT;
 import static com.aiunng.prj.entity.Constant.Y_AXIS_START;
+import static com.aiunng.prj.entity.Constant.ZONE_DDATE_TIME;
 import static com.aiunng.prj.entity.Constant.newFormat;
+import static com.aiunng.prj.entity.IntervalFormatEnum.getCodeByFormat;
 import static com.aiunng.prj.entity.StringZoneIdEnum.SHANGHAI;
 import static com.aiunng.prj.entity.StringZoneIdEnum.getCodeByDesc;
 import static com.aiunng.prj.entity.ZoneIdMap.getZoneList;
 import static com.aiunng.prj.util.ConfigUtil.getCodeByDescCache;
 import static com.aiunng.prj.util.ConfigUtil.getZoneIdsCache;
 import static com.aiunng.prj.util.DateConverter.converZone;
+import static com.aiunng.prj.util.DateConverter.convertDate2String;
 import static com.aiunng.prj.util.DateConverter.getCurrentDate;
 import static com.aiunng.prj.util.DateConverter.getCurrentTimestamp;
 import static com.aiunng.prj.util.DateConverter.getDate;
+import static com.aiunng.prj.util.DateConverter.getInterval;
 import static com.aiunng.prj.util.DateConverter.parseToZoneTime;
 import static com.aiunng.prj.util.DateConverter.zonedDateTimeFormat;
-import static com.aiunng.prj.util.SwingUtil.addComboBox;
 import static com.aiunng.prj.util.SwingUtil.addJBScrollPane;
 import static com.aiunng.prj.util.SwingUtil.addJButton;
 import static com.aiunng.prj.util.SwingUtil.addJTextArea;
 import static com.aiunng.prj.util.SwingUtil.addLabel;
 import static com.aiunng.prj.util.SwingUtil.addLabelY;
+import static com.aiunng.prj.util.SwingUtil.addTimeZoneComboBox;
+import static com.aiunng.prj.util.SwingUtil.addToTodayComboBox;
 
 import com.aiunng.prj.entity.MyZoneId;
 import com.aiunng.prj.entity.StringZoneIdEnum;
@@ -55,6 +75,7 @@ import java.net.URL;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
@@ -75,7 +96,7 @@ public class SwingManager {
 
     // 创建及设置窗口
     JFrame frame = new JFrame("时间转换工具");
-    frame.setBounds(600, 300, 660, 420);
+    frame.setBounds(600, 300, 660, 510);
 
     Container contentPane = frame.getContentPane();
     contentPane.setLayout(new BorderLayout());
@@ -89,25 +110,28 @@ public class SwingManager {
      */
     int y = buildClockRegion(contentPanel, Y_AXIS_START);
 
-    y = addLabelY("Timestamp TO Date", LEVE_3, X_AXIS_L1, y, Y_AXIS_L2_L1, 200, 25, contentPanel);
-    y = buildTimestampRegion("SECONDS:", getCurrentTimestamp(10), VIEW_TYPE_T2D, 10, y, Y_AXIS_L1_L2, contentPanel);
-    y = buildTimestampRegion("MILLISECONDS:", getCurrentTimestamp(13), VIEW_TYPE_T2D, 13, y, Y_AXIS_L2_L2, contentPanel);
+    y = addLabelY(TIMESTAMP_TO_DATE, LEVE_3, X_AXIS_L1, y, Y_AXIS_L2_L1, 200, 25, contentPanel);
+    y = buildTimestampRegion(SECONDS, getCurrentTimestamp(10), VIEW_TYPE_T2D, 10, y, Y_AXIS_L1_L2, contentPanel);
+    y = buildTimestampRegion(MILLISECONDS, getCurrentTimestamp(13), VIEW_TYPE_T2D, 13, y, Y_AXIS_L2_L2, contentPanel);
 
-    y = addLabelY("Date TO Timestamp", LEVE_3, X_AXIS_L1, y, Y_AXIS_L2_L1, 200, 25, contentPanel);
-    y = buildTimestampRegion("SECONDS:", getCurrentDate(), VIEW_TYPE_D2T, 10, y, Y_AXIS_L1_L2, contentPanel);
-    y = buildTimestampRegion("MILLISECONDS:", getCurrentDate(), VIEW_TYPE_D2T, 13, y, Y_AXIS_L2_L2, contentPanel);
+    y = addLabelY(DATE_TO_TIMESTAMP, LEVE_3, X_AXIS_L1, y, Y_AXIS_L2_L1, 200, 25, contentPanel);
+    y = buildTimestampRegion(SECONDS, getCurrentDate(), VIEW_TYPE_D2T, 10, y, Y_AXIS_L1_L2, contentPanel);
+    y = buildTimestampRegion(MILLISECONDS, getCurrentDate(), VIEW_TYPE_D2T, 13, y, Y_AXIS_L2_L2, contentPanel);
 
-    y = addLabelY("CST TO Date", LEVE_3, X_AXIS_L1, y, Y_AXIS_L2_L1, 200, 25, contentPanel);
-    y = buildTimestampRegion("CST:", getDate(), VIEW_TYPE_C2D, 0, y, Y_AXIS_L1_L2, contentPanel);
+    y = addLabelY(CST_TO_DATE, LEVE_3, X_AXIS_L1, y, Y_AXIS_L2_L1, 200, 25, contentPanel);
+    y = buildTimestampRegion(CST, getDate(), VIEW_TYPE_C2D, 0, y, Y_AXIS_L1_L2, contentPanel);
 
-    y = addLabelY("ZonedDateTime", LEVE_3, X_AXIS_L1, y, Y_AXIS_L2_L1, 200, 25, contentPanel);
+    y = addLabelY(ZONE_DDATE_TIME, LEVE_3, X_AXIS_L1, y, Y_AXIS_L2_L1, 200, 25, contentPanel);
     y = buildTimeZoneRegion(y, Y_AXIS_L1_L2, contentPanel);
 
+    y = addLabelY(TO_TODAY, LEVE_3, X_AXIS_L1, y, Y_AXIS_L2_L1, 200, 25, contentPanel);
+    y = buildToTodayRegion(y, Y_AXIS_L1_L2, contentPanel);
+
     // 帮助
-    buildHelpRegion(contentPanel);
+    buildHelpRegion(contentPanel, y, Y_AXIS_SETBUT);
 
     // 系统设置
-    buildCfgZoneRegion(contentPanel);
+    buildCfgZoneRegion(contentPanel, y, Y_AXIS_SETBUT);
 
     // 作者信息
     //addLabel("author：w*Yu", TEXT_SMALL, 540, 300, 100, 25, contentPanel);
@@ -120,10 +144,11 @@ public class SwingManager {
 
   /**
    * 帮助弹窗
+   *
    * @param contentPanel
    */
-  private static void buildHelpRegion(JPanel contentPanel) {
-    JButton cfgButton = addJButton("help", TEXT_NORMAL, 415, 360, 100, 25, contentPanel);
+  private static void buildHelpRegion(JPanel contentPanel, int y, int offset) {
+    JButton cfgButton = addJButton("help", TEXT_NORMAL, 415, y + offset, 100, 25, contentPanel);
 
     cfgButton.addActionListener(e -> {
       JDialog jDialog = new JDialog();
@@ -131,33 +156,39 @@ public class SwingManager {
       jDialog.setBounds(610, 310, 220, 180);
       jDialog.setVisible(true);
       jDialog.setLayout(null);
+      // 禁止用户调整窗口大小
+      jDialog.setResizable(false);
 
       Container contentPane = jDialog.getContentPane();
 
       JLabel imgLabel = new JLabel();
       ImageIcon img = null;
       try {
-        img = new ImageIcon(new URL("https://plugins.jetbrains.com/files/17065/screenshot_3d94a0b9-e5c3-4b17-a49e-ad4202cf813f"));
+        img = new ImageIcon(new URL(ICON_URL));
       } catch (MalformedURLException me) {
         me.printStackTrace();
       }
       //ImageIcon img = new ImageIcon("resources/META-INF/file/icon_50x50.png");
       imgLabel.setIcon(img);
-      imgLabel.setBounds(10, 10, 50, 50);
+      imgLabel.setBounds(85, 10, 50, 50);
 
-      JLabel authorLabel = new JLabel("author：w*Yu");
-      authorLabel.setBounds(10, 70, 100, 25);
+      int y1 = 70;
+      int offset1 = 20;
 
-      authorLabel.setFont(TEXT_BOLD);
+      JLabel versionLabel = new JLabel(VERSION);
+      versionLabel.setBounds(55, y1, 150, 25);
+      versionLabel.setFont(TEXT_BOLD);
 
-      JLabel textLabel = new JLabel("Date-convert helps you develop faster");
-      textLabel.setBounds(10, 90, 220, 25);
+      y1 = y1 + offset1;
+      JLabel textLabel = new JLabel(ADVER);
+      textLabel.setBounds(10, y1, 220, 25);
       textLabel.setFont(TEXT_BOLD);
 
-      JLabel linklabel = new JLabel("<html><a href='https://www.yuque.com/aiunng/elrg1e/ws3isn'>使用帮助、提出建议、问题反馈</a></html>");
+      y1 = y1 + offset1;
+      JLabel linklabel = new JLabel(BLOG_TEXT);
       // 光标类型
       linklabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-      linklabel.setBounds(10, 110, 200, 25);
+      linklabel.setBounds(35, y1, 200, 25);
       linklabel.setFont(TEXT_BOLD);
 
       // 鼠标监听
@@ -166,17 +197,23 @@ public class SwingManager {
         public void mouseClicked(MouseEvent e) {
           try {
             //打开网址
-            Desktop.getDesktop().browse(new URI("https://www.yuque.com/aiunng/elrg1e/ws3isn"));
+            Desktop.getDesktop().browse(new URI(BLOG_LINK));
           } catch (Exception ex) {
             ex.printStackTrace();
           }
         }
       });
 
+      y1 = y1 + offset1;
+      JLabel authorLabel = new JLabel(AUTHOR);
+      authorLabel.setBounds(70, y1, 100, 25);
+      authorLabel.setFont(TEXT_BOLD);
+
       contentPane.add(imgLabel);
-      contentPane.add(authorLabel);
+      contentPane.add(versionLabel);
       contentPane.add(textLabel);
       contentPane.add(linklabel);
+      contentPane.add(authorLabel);
     });
   }
 
@@ -185,8 +222,8 @@ public class SwingManager {
    *
    * @param contentPanel
    */
-  private static void buildCfgZoneRegion(JPanel contentPanel) {
-    JButton cfgButton = addJButton("settings", TEXT_NORMAL, 515, 360, 100, 25, contentPanel);
+  private static void buildCfgZoneRegion(JPanel contentPanel, int y, int offset) {
+    JButton cfgButton = addJButton("settings", TEXT_NORMAL, 515, y + offset, 100, 25, contentPanel);
     // 弹窗
     cfgButton.addActionListener(e -> {
 
@@ -280,7 +317,7 @@ public class SwingManager {
    */
   private static int buildTimeZoneRegion(int y, int offset, JPanel contentPanel) {
     // 下拉选
-    JComboBox comboBox = addComboBox(LEVE_3, X_AXIS_L1, y + offset, 110, 25, contentPanel);
+    JComboBox comboBox = addTimeZoneComboBox(LEVE_3, X_AXIS_L1, y + offset, 110, 25, contentPanel);
     //输入
     JTextArea jTextArea = addJTextArea(zonedDateTimeFormat(ZonedDateTime.now(ZoneId.systemDefault()), newFormat), TEXT_NORMAL, X_AXIS_INPUT,
         y + offset, 230, 25,
@@ -326,6 +363,42 @@ public class SwingManager {
     Timer timeAction = new Timer(100, e -> varTime.setText(
         zonedDateTimeFormat(ZonedDateTime.now(ZoneId.systemDefault()), LONG_FORMAT)));
     timeAction.start();
+  }
+
+  /**
+   * 计算指定日期至今时间
+   *
+   * @param contentPanel
+   */
+  private static int buildToTodayRegion(int y, int offset, JPanel contentPanel) {
+    // 下拉选
+    JComboBox comboBox = addToTodayComboBox(LEVE_3, X_AXIS_L1, y + offset, 110, 25, contentPanel);
+    //输入
+    JTextArea jTextArea = addJTextArea(convertDate2String(new Date(), SHORT_FORMAT), TEXT_NORMAL, X_AXIS_INPUT,
+        y + offset, 230, 25,
+        contentPanel);
+    //转换按钮
+    JButton button = addJButton("->", TEXT_NORMAL, X_AXIS_CONVER_BUTTON, y + offset, 60, 25, contentPanel);
+    //返回信息
+    JBScrollPane scrollPane = addJBScrollPane(TEXT_NORMAL, X_AXIS_OUTPUT, y + offset, 180, 25, contentPanel);
+
+    JTextArea answer = new JTextArea(1, 1);
+    answer.setLineWrap(true);
+    scrollPane.setViewportView(answer);
+
+    //按钮提交监听事件
+    button.addActionListener(e -> {
+      // 用户输入的时间
+      String inputDate = jTextArea.getText();
+      // 用户选中的格式
+      String inputFormat = comboBox.getSelectedItem().toString();
+
+      // 更新为转换后的时间
+      String code = getCodeByFormat(inputFormat);
+      // 根据配置转换
+      answer.setText(getInterval(inputDate, code));
+    });
+    return y + offset;
   }
 
   public static void main(String[] args) {

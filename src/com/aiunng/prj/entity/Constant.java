@@ -25,11 +25,14 @@ public class Constant {
   // Y轴起始坐标点
   public static final int Y_AXIS_START = 10;
   // Y轴一级和二级相差25
-  public static final int Y_AXIS_L1_L2 = 25;
+  public static final int Y_AXIS_L1_L2 = 30;
   // Y轴二级和二级相差25
   public static final int Y_AXIS_L2_L2 = 30;
   // Y轴二级和二级相差25
   public static final int Y_AXIS_L2_L1 = 35;
+
+  // Y轴设置帮助按钮与上一元素相差50
+  public static final int Y_AXIS_SETBUT = 50;
 
   //字体
   public static final Font LEVE_1 = new Font("宋体", Font.BOLD, 25);
@@ -43,6 +46,7 @@ public class Constant {
   public static final Font TEXT_SMALL = new Font("宋体", Font.PLAIN, 10);
 
   public static final String newFormat = "yyyy-MM-dd HH:mm:ss";
+  public static final String SHORT_FORMAT = "yyyy-MM-dd";
   public static final String LONG_FORMAT = "VV yyyy-MM-dd HH:mm:ss.SSS";
 
   /**
@@ -63,6 +67,32 @@ public class Constant {
    * 本地配置存放目录 System.getProperty("user.home") 用户文件夹
    */
   public static final String LOCAL_CFG_PATH = System.getProperty("user.home") + FILE_SEPARATOR + "dateconver" + FILE_SEPARATOR + "settings.cfg";
+
+  /**
+   * 一级标题
+   */
+  public static final String TIMESTAMP_TO_DATE = "Timestamp To Date";
+  public static final String DATE_TO_TIMESTAMP = "Date To Timestamp";
+  public static final String CST_TO_DATE = "CST To Date";
+  public static final String ZONE_DDATE_TIME = "Zoned Date Time";
+  public static final String TO_TODAY = "To Today";
+
+  /**
+   * 二级标题
+   */
+  public static final String SECONDS = "SECONDS:";
+  public static final String MILLISECONDS = "MILLISECONDS:";
+  public static final String CST = "CST:";
+
+  /**
+   * 关于信息
+   */
+  public static final String ICON_URL = "https://plugins.jetbrains.com/files/17065/screenshot_3d94a0b9-e5c3-4b17-a49e-ad4202cf813f";
+  public static final String VERSION = "版本2021.07.16 (1.0.3)";
+  public static final String ADVER = "Date-Convert helps you develop faster";
+  public static final String BLOG_LINK = "https://www.yuque.com/aiunng/elrg1e/ws3isn";
+  public static final String BLOG_TEXT = "<html><a href='"+BLOG_LINK+"'>使用帮助、提出建议、问题反馈</a></html>";
+  public static final String AUTHOR = "author：w*Yu";
 
 
 }
