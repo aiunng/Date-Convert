@@ -17,7 +17,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Pattern;
-import org.apache.commons.lang3.StringUtils;
 
 
 public class DateConverter {
@@ -259,16 +258,16 @@ public class DateConverter {
     long currentTime = System.currentTimeMillis();
     long day = (currentTime - inputTime) / 1000 / 60 / 60 / 24;
 
-    if (StringUtils.equals(format, D.getCode())) {
+    if (StringUtil.equals(format, D.getCode())) {
       interval = day + D.getView();
     }
-    if (StringUtils.equals(format, M.getCode())) {
+    if (StringUtil.equals(format, M.getCode())) {
       String mounth = String.valueOf(day / 30);
       String mDay = String.valueOf(day % 30);
       interval = mounth + M.getView() + mDay + D.getView();
 
     }
-    if (StringUtils.equals(format, Y.getCode())) {
+    if (StringUtil.equals(format, Y.getCode())) {
       String year = String.valueOf(day / 365);
       String yMounth = String.valueOf(day % 365 / 30);
       String yDay = String.valueOf(day % 365 % 30);
