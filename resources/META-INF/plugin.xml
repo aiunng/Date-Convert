@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>com.aiunng.prj.idea.plugin.date.convert</id>
   <name>Date-Convert</name>
-  <version>2021.07.16.2</version>
+  <version>2021.10.20</version>
   <vendor email="17701306521@163.com" url="https://www.yuque.com/aiunng/elrg1e/ws3isn">w*Yu</vendor>
 
   <description><![CDATA[
@@ -88,7 +88,8 @@
   </change-notes>
 
   <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-  <idea-version since-build="173.0"/>
+  <!-- 兼容低版本IDEA -->
+  <idea-version since-build="162.0"/>
 
   <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
        on how to target different products -->
