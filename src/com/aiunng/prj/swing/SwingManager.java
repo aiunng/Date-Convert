@@ -14,9 +14,15 @@ import static com.aiunng.prj.entity.Constant.LONG_FORMAT;
 import static com.aiunng.prj.entity.Constant.MILLISECONDS;
 import static com.aiunng.prj.entity.Constant.SECONDS;
 import static com.aiunng.prj.entity.Constant.SHORT_FORMAT;
+import static com.aiunng.prj.entity.Constant.SPLIT;
+import static com.aiunng.prj.entity.Constant.SQL_GENER_LINK;
+import static com.aiunng.prj.entity.Constant.STRING_CONVERT_LINK;
 import static com.aiunng.prj.entity.Constant.TEXT_BOLD;
 import static com.aiunng.prj.entity.Constant.TEXT_NORMAL;
 import static com.aiunng.prj.entity.Constant.TIMESTAMP_TO_DATE;
+import static com.aiunng.prj.entity.Constant.TOMO;
+import static com.aiunng.prj.entity.Constant.TOMO_TEXT_SQL_GENER;
+import static com.aiunng.prj.entity.Constant.TOMO_TEXT_STRING_CONVERT;
 import static com.aiunng.prj.entity.Constant.TO_TODAY;
 import static com.aiunng.prj.entity.Constant.VERSION;
 import static com.aiunng.prj.entity.Constant.VIEW_TYPE_C2D;
@@ -95,7 +101,7 @@ public class SwingManager {
   public static void createAndShowGUI() {
 
     // 创建及设置窗口
-    JFrame frame = new JFrame("时间转换工具");
+    JFrame frame = new JFrame("Date-Convert");
     frame.setBounds(600, 300, 660, 510);
 
     Container contentPane = frame.getContentPane();
@@ -153,7 +159,7 @@ public class SwingManager {
     cfgButton.addActionListener(e -> {
       JDialog jDialog = new JDialog();
       jDialog.setTitle("help");
-      jDialog.setBounds(610, 310, 220, 180);
+      jDialog.setBounds(610, 310, 220, 250);
       jDialog.setVisible(true);
       jDialog.setLayout(null);
       // 禁止用户调整窗口大小
@@ -209,11 +215,64 @@ public class SwingManager {
       authorLabel.setBounds(70, y1, 100, 25);
       authorLabel.setFont(TEXT_BOLD);
 
+      y1 = y1 + offset1 + 10;
+      JLabel splitLabel = new JLabel(SPLIT);
+      splitLabel.setBounds(0, y1, 300, 5);
+      splitLabel.setFont(TEXT_BOLD);
+
+      y1 = y1 + 10;
+      JLabel tomoLabel = new JLabel(TOMO);
+      tomoLabel.setBounds(10, y1, 100, 25);
+      tomoLabel.setFont(TEXT_BOLD);
+
+      y1 = y1 + offset1;
+      JLabel stringConvertLink = new JLabel(TOMO_TEXT_STRING_CONVERT);
+      // 光标类型
+      stringConvertLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
+      stringConvertLink.setBounds(20, y1, 80, 25);
+      stringConvertLink.setFont(TEXT_BOLD);
+
+      // 鼠标监听
+      stringConvertLink.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+          try {
+            //打开网址
+            Desktop.getDesktop().browse(new URI(STRING_CONVERT_LINK));
+          } catch (Exception ex) {
+            ex.printStackTrace();
+          }
+        }
+      });
+
+      JLabel sqlGenerLink = new JLabel(TOMO_TEXT_SQL_GENER);
+      // 光标类型
+      sqlGenerLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
+      sqlGenerLink.setBounds(110, y1, 80, 25);
+      sqlGenerLink.setFont(TEXT_BOLD);
+
+      // 鼠标监听
+      sqlGenerLink.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+          try {
+            //打开网址
+            Desktop.getDesktop().browse(new URI(SQL_GENER_LINK));
+          } catch (Exception ex) {
+            ex.printStackTrace();
+          }
+        }
+      });
+
       contentPane.add(imgLabel);
       contentPane.add(versionLabel);
       contentPane.add(textLabel);
       contentPane.add(linklabel);
       contentPane.add(authorLabel);
+      contentPane.add(splitLabel);
+      contentPane.add(tomoLabel);
+      contentPane.add(stringConvertLink);
+      contentPane.add(sqlGenerLink);
     });
   }
 

@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>com.aiunng.prj.idea.plugin.date.convert</id>
   <name>Date-Convert</name>
-  <version>2021.10.20</version>
+  <version>2021.10.22</version>
   <vendor email="17701306521@163.com" url="https://www.yuque.com/aiunng/elrg1e/ws3isn">w*Yu</vendor>
 
   <description><![CDATA[
@@ -69,6 +69,10 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p><font size="5">1.0.4</font></p>
+        <ul>
+          <li>[NEW]tool bar Shortcut</li>
+        </ul>
       <p><font size="5">1.0.3</font></p>
         <ul>
           <li>[NEW]To Today</li>
@@ -104,6 +108,12 @@
     <action id="date-convert.start" class="com.aiunng.prj.StartTask" text="Date Convert" description="时间转换工具">
       <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl D"/>
       <add-to-group group-id="ToolsMenu" anchor="last"/>
+    </action>
+    <action id="date-convert.toolbar.start"
+      class="com.aiunng.prj.StartTask"
+      text="Date Convert"
+      description="Date Convert" icon="/file/生产延误时间鉴定16.png">
+      <add-to-group group-id="ToolbarRunGroup" anchor="after" relative-to-action="Stop"/>
     </action>
   </actions>
 
