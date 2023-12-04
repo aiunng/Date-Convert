@@ -9,9 +9,11 @@ import static com.aiunng.prj.entity.Constant.CST;
 import static com.aiunng.prj.entity.Constant.CST_TO_DATE;
 import static com.aiunng.prj.entity.Constant.DATE_TO_TIMESTAMP;
 import static com.aiunng.prj.entity.Constant.ICON_URL;
+import static com.aiunng.prj.entity.Constant.INPUT_WIDTH;
 import static com.aiunng.prj.entity.Constant.LEVE_3;
 import static com.aiunng.prj.entity.Constant.LONG_FORMAT;
 import static com.aiunng.prj.entity.Constant.MILLISECONDS;
+import static com.aiunng.prj.entity.Constant.OUTPUT_WIDTH;
 import static com.aiunng.prj.entity.Constant.SECONDS;
 import static com.aiunng.prj.entity.Constant.SHORT_FORMAT;
 import static com.aiunng.prj.entity.Constant.SPLIT;
@@ -102,7 +104,7 @@ public class SwingManager {
 
     // 创建及设置窗口
     JFrame frame = new JFrame("Date-Convert");
-    frame.setBounds(600, 300, 660, 510);
+    frame.setBounds(550, 300, 800, 510);
 
     Container contentPane = frame.getContentPane();
     contentPane.setLayout(new BorderLayout());
@@ -154,7 +156,7 @@ public class SwingManager {
    * @param contentPanel
    */
   private static void buildHelpRegion(JPanel contentPanel, int y, int offset) {
-    JButton cfgButton = addJButton("help", TEXT_NORMAL, 415, y + offset, 100, 25, contentPanel);
+    JButton cfgButton = addJButton("help", TEXT_NORMAL, 455, y + offset, 100, 25, contentPanel);
 
     cfgButton.addActionListener(e -> {
       JDialog jDialog = new JDialog();
@@ -174,7 +176,7 @@ public class SwingManager {
       } catch (MalformedURLException me) {
         me.printStackTrace();
       }
-      //ImageIcon img = new ImageIcon("resources/META-INF/file/icon_50x50.png");
+      // ImageIcon img = new ImageIcon("resources/META-INF/file/icon_50x50.png");
       imgLabel.setIcon(img);
       imgLabel.setBounds(85, 10, 50, 50);
 
@@ -256,7 +258,7 @@ public class SwingManager {
         @Override
         public void mouseClicked(MouseEvent e) {
           try {
-            //打开网址
+            // 打开网址
             Desktop.getDesktop().browse(new URI(SQL_GENER_LINK));
           } catch (Exception ex) {
             ex.printStackTrace();
@@ -282,7 +284,7 @@ public class SwingManager {
    * @param contentPanel
    */
   private static void buildCfgZoneRegion(JPanel contentPanel, int y, int offset) {
-    JButton cfgButton = addJButton("settings", TEXT_NORMAL, 515, y + offset, 100, 25, contentPanel);
+    JButton cfgButton = addJButton("settings", TEXT_NORMAL, 555, y + offset, 100, 25, contentPanel);
     // 弹窗
     cfgButton.addActionListener(e -> {
 
@@ -337,20 +339,20 @@ public class SwingManager {
 
     //10位时间戳转换
     addLabel(text, TEXT_NORMAL, X_AXIS_L2, y + offset, 200, 25, contentPanel);
-    //输入
-    JTextArea input = addJTextArea(defaultInput, TEXT_NORMAL, X_AXIS_INPUT, y + offset, 230, 25, contentPanel);
-    //转换按钮
+    // 输入
+    JTextArea input = addJTextArea(defaultInput, TEXT_NORMAL, X_AXIS_INPUT, y + offset, INPUT_WIDTH, 25, contentPanel);
+    // 转换按钮
     JButton button = addJButton("->", TEXT_NORMAL, X_AXIS_CONVER_BUTTON, y + offset, 60, 25, contentPanel);
-    //返回信息
-    JBScrollPane scrollPane = addJBScrollPane(TEXT_NORMAL, X_AXIS_OUTPUT, y + offset, 180, 25, contentPanel);
+    // 返回信息
+    JBScrollPane scrollPane = addJBScrollPane(TEXT_NORMAL, X_AXIS_OUTPUT, y + offset, OUTPUT_WIDTH, 25, contentPanel);
 
     JTextArea answer = new JTextArea(1, 1);
     answer.setLineWrap(true);
-    //不可编辑
+    // 不可编辑
     //answerContent.setEnabled(false);
     scrollPane.setViewportView(answer);
 
-    //按钮提交监听事件
+    // 按钮提交监听事件
     button.addActionListener(e -> {
       String result = "";
       // 获取输入的问题
@@ -377,14 +379,14 @@ public class SwingManager {
   private static int buildTimeZoneRegion(int y, int offset, JPanel contentPanel) {
     // 下拉选
     JComboBox comboBox = addTimeZoneComboBox(LEVE_3, X_AXIS_L1, y + offset, 110, 25, contentPanel);
-    //输入
+    // 输入
     JTextArea jTextArea = addJTextArea(zonedDateTimeFormat(ZonedDateTime.now(ZoneId.systemDefault()), newFormat), TEXT_NORMAL, X_AXIS_INPUT,
-        y + offset, 230, 25,
+        y + offset, INPUT_WIDTH, 25,
         contentPanel);
-    //转换按钮
+    // 转换按钮
     JButton button = addJButton("->", TEXT_NORMAL, X_AXIS_CONVER_BUTTON, y + offset, 60, 25, contentPanel);
-    //返回信息
-    JBScrollPane scrollPane = addJBScrollPane(TEXT_NORMAL, X_AXIS_OUTPUT, y + offset, 180, 25, contentPanel);
+    // 返回信息
+    JBScrollPane scrollPane = addJBScrollPane(TEXT_NORMAL, X_AXIS_OUTPUT, y + offset, OUTPUT_WIDTH, 25, contentPanel);
 
     JTextArea answer = new JTextArea(1, 1);
     answer.setLineWrap(true);
@@ -432,14 +434,14 @@ public class SwingManager {
   private static int buildToTodayRegion(int y, int offset, JPanel contentPanel) {
     // 下拉选
     JComboBox comboBox = addToTodayComboBox(LEVE_3, X_AXIS_L1, y + offset, 110, 25, contentPanel);
-    //输入
+    // 输入
     JTextArea jTextArea = addJTextArea(convertDate2String(new Date(), SHORT_FORMAT), TEXT_NORMAL, X_AXIS_INPUT,
-        y + offset, 230, 25,
+        y + offset, INPUT_WIDTH, 25,
         contentPanel);
-    //转换按钮
+    // 转换按钮
     JButton button = addJButton("->", TEXT_NORMAL, X_AXIS_CONVER_BUTTON, y + offset, 60, 25, contentPanel);
-    //返回信息
-    JBScrollPane scrollPane = addJBScrollPane(TEXT_NORMAL, X_AXIS_OUTPUT, y + offset, 180, 25, contentPanel);
+    // 返回信息
+    JBScrollPane scrollPane = addJBScrollPane(TEXT_NORMAL, X_AXIS_OUTPUT, y + offset, OUTPUT_WIDTH, 25, contentPanel);
 
     JTextArea answer = new JTextArea(1, 1);
     answer.setLineWrap(true);

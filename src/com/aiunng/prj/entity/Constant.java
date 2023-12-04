@@ -19,9 +19,9 @@ public class Constant {
   // 文本输入框 X轴坐标点
   public static final int X_AXIS_INPUT = 140;
   // 转换按钮 X轴坐标点
-  public static final int X_AXIS_CONVER_BUTTON = 370;
+  public static final int X_AXIS_CONVER_BUTTON = 385;
   // 返回值 X轴坐标点
-  public static final int X_AXIS_OUTPUT = 430;
+  public static final int X_AXIS_OUTPUT = 445;
   // Y轴起始坐标点
   public static final int Y_AXIS_START = 10;
   // Y轴一级和二级相差25
@@ -33,6 +33,11 @@ public class Constant {
 
   // Y轴设置帮助按钮与上一元素相差50
   public static final int Y_AXIS_SETBUT = 50;
+
+  // 输入框宽度
+  public static final int INPUT_WIDTH = 240;
+  // 输出框宽度
+  public static final int OUTPUT_WIDTH = 210;
 
   //字体
   public static final Font LEVE_1 = new Font("宋体", Font.BOLD, 25);
