@@ -8,6 +8,8 @@ import static com.aiunng.prj.entity.Constant.BLOG_TEXT;
 import static com.aiunng.prj.entity.Constant.CST;
 import static com.aiunng.prj.entity.Constant.CST_TO_DATE;
 import static com.aiunng.prj.entity.Constant.DATE_TO_TIMESTAMP;
+import static com.aiunng.prj.entity.Constant.GAN_ZHI;
+import static com.aiunng.prj.entity.Constant.GONG_LI;
 import static com.aiunng.prj.entity.Constant.ICON_URL;
 import static com.aiunng.prj.entity.Constant.INPUT_WIDTH;
 import static com.aiunng.prj.entity.Constant.LEVE_3;
@@ -68,6 +70,7 @@ import com.aiunng.prj.entity.MyZoneId;
 import com.aiunng.prj.entity.StringZoneIdEnum;
 import com.aiunng.prj.util.ConfigUtil;
 import com.aiunng.prj.util.DateConverter;
+import com.aiunng.prj.util.GanZhiJiNianUtil;
 import com.aiunng.prj.util.StringUtil;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.util.ui.JBUI;
@@ -104,7 +107,7 @@ public class SwingManager {
 
     // 创建及设置窗口
     JFrame frame = new JFrame("Date-Convert");
-    frame.setBounds(550, 300, 800, 510);
+    frame.setBounds(550, 300, 760, 580);
 
     Container contentPane = frame.getContentPane();
     contentPane.setLayout(new BorderLayout());
@@ -116,7 +119,11 @@ public class SwingManager {
     /**
      * 功能区视图
      */
-    int y = buildClockRegion(contentPanel, Y_AXIS_START);
+    int y;
+
+    y = buildChineseRegion(contentPanel, Y_AXIS_START);
+
+    y = buildClockRegion(contentPanel, y);
 
     y = addLabelY(TIMESTAMP_TO_DATE, LEVE_3, X_AXIS_L1, y, Y_AXIS_L2_L1, 200, 25, contentPanel);
     y = buildTimestampRegion(SECONDS, getCurrentTimestamp(10), VIEW_TYPE_T2D, 10, y, Y_AXIS_L1_L2, contentPanel);
@@ -134,6 +141,9 @@ public class SwingManager {
 
     y = addLabelY(TO_TODAY, LEVE_3, X_AXIS_L1, y, Y_AXIS_L2_L1, 200, 25, contentPanel);
     y = buildToTodayRegion(y, Y_AXIS_L1_L2, contentPanel);
+
+    y = addLabelY(GAN_ZHI, LEVE_3, X_AXIS_L1, y, Y_AXIS_L2_L1, 200, 25, contentPanel);
+    y = buildToChineseRegion(GONG_LI, y, Y_AXIS_L1_L2, contentPanel);
 
     // 帮助
     buildHelpRegion(contentPanel, y, Y_AXIS_SETBUT);
@@ -316,13 +326,25 @@ public class SwingManager {
   }
 
   /**
+   * 干支纪年
+   *
+   * @param contentPanel
+   * @param y
+   * @return
+   */
+  private static int buildChineseRegion(JPanel contentPanel, int y) {
+    addLabel(GanZhiJiNianUtil.chineseDate() + " ｜   ", LEVE_3, 60, y, 280, 25, contentPanel);
+    return y;
+  }
+
+  /**
    * 动态展示当前时区时间
    *
    * @param contentPanel
    */
   private static int buildClockRegion(JPanel contentPanel, int y) {
     JLabel timeLable = addLabel(
-        zonedDateTimeFormat(ZonedDateTime.now(ZoneId.systemDefault()), LONG_FORMAT), LEVE_3, 180, y, 330, 25, contentPanel);
+        zonedDateTimeFormat(ZonedDateTime.now(ZoneId.systemDefault()), LONG_FORMAT), LEVE_3, 280, y, 330, 25, contentPanel);
     setTimer(timeLable);
     return y;
   }
@@ -458,6 +480,37 @@ public class SwingManager {
       String code = getCodeByFormat(inputFormat);
       // 根据配置转换
       answer.setText(getInterval(inputDate, code));
+    });
+    return y + offset;
+  }
+
+  /**
+   * 计算指定日期至今时间
+   *
+   * @param contentPanel
+   */
+  private static int buildToChineseRegion(String text, int y, int offset, JPanel contentPanel) {
+
+    addLabel(text, TEXT_NORMAL, X_AXIS_L2, y + offset, 200, 25, contentPanel);
+    // 输入
+    JTextArea jTextArea = addJTextArea(getCurrentDate(), TEXT_NORMAL, X_AXIS_INPUT,
+        y + offset, INPUT_WIDTH, 25,
+        contentPanel);
+    // 转换按钮
+    JButton button = addJButton("->", TEXT_NORMAL, X_AXIS_CONVER_BUTTON, y + offset, 60, 25, contentPanel);
+    // 返回信息
+    JBScrollPane scrollPane = addJBScrollPane(TEXT_NORMAL, X_AXIS_OUTPUT, y + offset, OUTPUT_WIDTH, 25, contentPanel);
+
+    JTextArea answer = new JTextArea(1, 1);
+    answer.setLineWrap(true);
+    scrollPane.setViewportView(answer);
+
+    //按钮提交监听事件
+    button.addActionListener(e -> {
+      // 用户输入的时间
+      String inputDate = jTextArea.getText();
+      // 根据配置转换
+      answer.setText(GanZhiJiNianUtil.chineseDate(inputDate));
     });
     return y + offset;
   }

@@ -81,6 +81,7 @@ public class Constant {
   public static final String CST_TO_DATE = "CST To Date";
   public static final String ZONE_DDATE_TIME = "Zoned Date Time";
   public static final String TO_TODAY = "To Today";
+  public static final String GAN_ZHI = "干支纪年";
 
   /**
    * 二级标题
@@ -88,6 +89,7 @@ public class Constant {
   public static final String SECONDS = "SECONDS:";
   public static final String MILLISECONDS = "MILLISECONDS:";
   public static final String CST = "CST:";
+  public static final String GONG_LI = "公历:";
 
   /**
    * 关于信息

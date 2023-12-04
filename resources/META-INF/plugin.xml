@@ -34,6 +34,10 @@
       <ul>
         <li>Calculate the time since the specified date,Optionally by year, month, day</li>
       </ul>
+      <p><font size="5">GanZhiJiNian Calendar:</font></p>
+      <ul>
+        <li>Convert the specified date to Gan Zhi Ji Nian</li>
+      </ul>
 
       <br>
       <p><font size="5">如何使用：</font></p>
@@ -63,6 +67,10 @@
       <ul>
         <li>计算指定日期至今的时间（可选按年、月、日）</li>
       </ul>
+      <p><font size="5">干支纪年：</font></p>
+      <ul>
+        <li>指定日期转换为干支纪年历</li>
+      </ul>
 
       <p><font size="5">使用界面：</font></p>
       <img src="https://plugins.jetbrains.com/files/17065/screenshot_342f3c06-1ef4-40a8-95ff-b852c7bc761c" width="360"/>
@@ -74,6 +82,7 @@
       <p><font size="5">1.0.5</font></p>
         <ul>
           <li>[FIX]display optimization</li>
+          <li>[NEW]Chinese GanZhiJiNian Calendar</li>
         </ul>
       <p><font size="5">1.0.4</font></p>
         <ul>
